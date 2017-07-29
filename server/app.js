@@ -19,4 +19,4 @@ webpack(app);
 
 app.listen(PORT);
 
-console.info('Open up https://localhost:%s/ in your browser.', PORT);
+console.info('Open up http://localhost:%s/ in your browser.', PORT);

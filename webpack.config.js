@@ -1,48 +1,102 @@
-'use strict';
+var path = require('path');
+var webpack = require('webpack');
 
-import path from 'path';
-import webpack from 'webpack';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import CleanWebpackPlugin from 'clean-webpack-plugin';
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-export const config = {
+
+module.exports = {
+  context: path.resolve('client'),
   devtool: 'eval-source-map',
-  entry: [
-    'webpack-hot-middleware/client?reload=true',
-    path.join(__dirname, 'client/index.jsx')
-  ],
+
+  entry: {
+    main: './index.jsx',
+  },
   output: {
-    path: path.join(__dirname, '/dist/'),
-    filename: '[name].js',
+    path: path.resolve('dist'),
+    filename: '[name].js'
+  },
+
+  plugins: [
+    new webpack.HotModuleReplacementPlugin({}),
+
+    new ExtractTextPlugin({
+      filename: '[name].bundle.css',
+      allChunks: true,
+    })
+  ],
+
+  devServer: {
+    hot: true,
+    contentBase: path.resolve('dist'),
     publicPath: '/'
   },
-  plugins: [
-    new CleanWebpackPlugin(['dist']),
-    new HtmlWebpackPlugin({
-      template: 'client/index.tpl.html',
-      inject: 'body',
-      filename: 'index.html'
-    }),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-  ],
+
   module: {
-    loaders: [{
-      test: /\.jsx?$/,
-      exclude: /node_modules/,
-      loader: 'babel-loader',
-      query: {
-        "presets": ["react", "es2015", "stage-0", "react-hmre"]
+    rules: [
+      {
+        // regexp that tells webpack to use the following loaders
+        // on all .js and .jsx files
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          // specify that we will be dealing with React code
+          presets: ['react', 'stage-1']
+        }
+      },
+      {
+        test: /\.css$/,
+        // use: ['style-loader', 'css-loader']
+        use: ExtractTextPlugin.extract({
+           fallback: 'style-loader',
+           use: [
+            'css-loader', 
+            'resolve-url-loader', 
+            { 
+              loader: 'postcss-loader',
+              options: {
+                plugins: (loader) => [
+                  /* 
+                   * https://github.com/postcss/postcss-loader
+                   * Production configurations
+                   */
+                  require('autoprefixer')(),
+                  require('cssnano')()
+                ]
+              }
+            }]
+        })
+      },
+      {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+           fallback: 'style-loader',
+           use: [
+            'css-loader', 
+            'resolve-url-loader', 
+            { 
+              loader: 'postcss-loader',
+              options: {
+                plugins: (loader) => [
+                  require('autoprefixer')(),
+                  require('cssnano')()
+                ]
+              }
+
+            },
+            'sass-loader'
+            ]
+        })
       }
-    }, {
-      test: /\.json?$/,
-      loader: 'json'
-    }, {
-      test: /\.css$/,
-      loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]'
-    }]
+    ]
   },
+
   resolve: {
-    extensions: ['.js', '.jsx', '.json', '.css'],
+    // tells webpack where to look for modules
+    modules: ['node_modules'],
+
+    // extensions that should be used to resolve modules
+    extensions: ['.js', '.jsx', '.scss', '.css']
   }
-};
+
+}

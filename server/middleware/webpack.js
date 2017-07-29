@@ -9,7 +9,7 @@ import { ENV, DIST } from '../config/config';
 
 export default (app) => {
   
-  if (ENV === 'production') {
+  if (ENV === 'development') {
     const compiler = webpack(webpackConfig);
     const middleware = webpackMiddleware(compiler, {
       publicPath: webpackConfig.output.publicPath,
@@ -27,13 +27,14 @@ export default (app) => {
     app.use(middleware);
     app.use(webpackHotMiddleware(compiler));
     app.get('*', function response(req, res) {
+      console.log(path.join(DIST, 'index.html'));
       res.write(middleware.fileSystem.readFileSync(path.join(DIST, 'index.html')));
       res.end();
     });
     return;
   }
 
-  if (ENV === 'development') {
+  if (ENV === 'production') {
     app.get('*', function response(req, res) {
       res.sendFile(path.join(DIST, 'index.html'));
     });
