@@ -1,12 +1,14 @@
 'use strict';
 
 import express from 'express';
-import { PORT } from './config/config.js';
 import webpack from './middleware/webpack';
+import history from 'connect-history-api-fallback';
+
+import { PORT } from './config/config.js';
 
 const app = express();
 
-
+app.use(history({verbose: true}));
 
 //const api = require('./api/api');
 

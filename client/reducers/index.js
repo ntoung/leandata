@@ -5,8 +5,6 @@ export const initialState = {
   
 };
 
-export const reducers = {};
+export const reducers = combineReducers({
 
-// combineReducers({
-
-// });
+});
