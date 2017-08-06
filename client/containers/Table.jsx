@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
-import '../js/fixedHeaderTable';
-import styles from '../styles/table-fixed.css';
+import '../styles/table-fixed.css';
 
 class Table extends Component {
   constructor(props) {
@@ -14,65 +12,84 @@ class Table extends Component {
   }
 
   displayHeaders() {    
-    return this.props.headers.map((header, key) => {
-      return (
-        <th style={{'float':'left'}} key={key}>
-          <div> {header} </div>
-        </th>
-
+    return (
+      <div className="table-row header">
+        <div className="wrapper text-4">
+          {
+            this.props.headers.map((header, key) => {
+              return (
+                <div className="text" key={key}>
+                 {header}
+                </div>
+              );
+            })
+          }
+          </div>
+      </div>
       );
-    });
   }
+  
 
   displayData() {
     return this.props.data.map((row, key) => {
       return (
-        <tr key={key} className={styles.cell}>
-          <td style={{'float':'left', 'display': 'block'}} key={key}>{this.props.labels[key]}</td>
-          { row.map((item, key) => {
-            return (
-                <td style={{'float':'left', 'display': 'block'}} key={key}>{item}</td>
-              );
-            })
-          }
-        </tr>
+        <div className="table-row" key={key}>
+          <div className="wrapper text-4">
+            <div className="text">{this.props.labels[key]}</div>
+            {
 
-      )  
-    })
-    
+              row.map((item, key) => {
+                return (
+                  <div className="text" key={key}>{item}</div>
+                );
+              })
+            }
+          </div>
+        </div>
+      );  
+    });
   }
 
   render() {
     return (
-      <div className="container">
+      <div className="container-fluid" >
+        {this.displayHeaders()}
+            
+        <div style={{overflowY: 'scroll', height: '250px'}}>
+          {this.displayData()}  
+        </div>
+      </div>
+    );
+  }
+}
+/*
+  <div className="container">
         <div className="table-responsive">
-          <table className="table table-fixed">
-            <thead style={{
+          <div className="table table-fixed">
+            <div style={{
               'display': 'block',
               'width': '97%'
             }}>
-              <tr style={{
+              <div style={{
                 'display': 'block',
                 'float': 'left'
               }}>
                 {this.displayHeaders()}
-              </tr>
-            </thead>
+              </div>
+            </div>
             
-            <tbody style={{
+            <div style={{
               'display': 'block',
               'height': '230px',
               'overflowY': 'auto',
               'width': '100%',
             }}>
                 {this.displayData()}
-            </tbody>
-          </table>
+            </div>
+          </div>
         </div>
       </div>
-    );
-  }
-}
+*/
 
 const mapStateToProps = state => {
   return {
@@ -85,4 +102,3 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch); 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);
-

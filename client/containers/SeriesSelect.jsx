@@ -5,8 +5,6 @@ import ReactSelect from 'react-select';
 import 'react-select/dist/react-select.css';
 import { setDisplayedSeries } from '../actions/GraphActions';
 
-// import styles from ''
-
 class SeriesSelect extends Component {
   constructor(props) {
     super(props);
@@ -22,8 +20,6 @@ class SeriesSelect extends Component {
     
     this.props.setDisplayedSeries({displayedSeries: displayedSeries});
   };
-
-
 
   render() {
     let selectOptions = this.props.headers.slice(1).map(header => {

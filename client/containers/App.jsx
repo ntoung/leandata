@@ -1,18 +1,14 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
-import Graph from './Graph.jsx';
+import Graph from './Graph';
 import SeriesSelect from './SeriesSelect';
 import DateStartSelect from './DateStartSelect';
 import DateEndSelect from './DateEndSelect';
-import FileUpload from './FileUpload.jsx';
-import Table from './Table.jsx';
+import FileUpload from './FileUpload';
+import Table from './Table';
+
 
 class App extends React.Component {
-
-
-
   render() {
     return (
       <div className="">
@@ -27,12 +23,4 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    
-  };
-}
-
-const mapDispatchToProps = dispatch => bindActionCreators({ }, dispatch); 
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

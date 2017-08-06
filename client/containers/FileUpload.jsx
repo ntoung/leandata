@@ -68,12 +68,7 @@ class FileUpload extends Component {
     this.props.setDateStart({'dateStart': 0});
     this.props.setDateEnd({'dateEnd': labels.length - 1});    
     this.props.setDisplayedSeries({'displayedSeries': displayedSeries});
-    
-
-
   };
-
-
 
   render() {
     return (
@@ -83,7 +78,6 @@ class FileUpload extends Component {
     );
   }
 }
-
 
 const mapDispatchToProps = dispatch => bindActionCreators({ setData, setSeries, setHeaders, setLabels, setDateStart, setDateEnd, setDisplayedSeries}, dispatch); 
 

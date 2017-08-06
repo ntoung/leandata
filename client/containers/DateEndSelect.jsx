@@ -16,10 +16,8 @@ class DateEndSelect extends Component {
     this.handleSelectChange = this.handleSelectChange.bind(this);
   }
 
-
-
   handleSelectChange (value) {
-    let dateEnd = value; //this.props.dateStart + value;
+    let dateEnd = value; 
     this.props.setDateEnd({'dateEnd': dateEnd});
   };
 
