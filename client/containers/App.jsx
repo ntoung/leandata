@@ -2,13 +2,26 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import Graph from '../components/Graph.jsx';
+import Graph from './Graph.jsx';
+import SeriesSelect from './SeriesSelect';
+import DateStartSelect from './DateStartSelect';
+import DateEndSelect from './DateEndSelect';
+import FileUpload from './FileUpload.jsx';
+import Table from './Table.jsx';
 
 class App extends React.Component {
+
+
+
   render() {
     return (
       <div className="">
         <Graph/>
+        <SeriesSelect/>
+        <DateStartSelect/>
+        <DateEndSelect/>
+        <FileUpload/>
+        <Table/>
       </div>
     );
   }

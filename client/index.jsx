@@ -11,9 +11,8 @@ import { createStore, compose, applyMiddleware } from 'redux';
 import { reducers, initialState } from './reducers';
 
 const store = createStore(reducers, initialState,
-  compose(
-  ),
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 ReactDOM.render(
   <Provider store={store}>

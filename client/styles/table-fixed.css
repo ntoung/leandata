@@ -1,0 +1,17 @@
+
+
+.tHead {
+  display: block;
+  width: 500px;
+  overflow: auto;
+  color: #fff;
+  background: #000;
+}
+
+.tBody {
+  display: block;
+  width: 500px;
+  height: 200px;
+  background: pink;
+  overflow: auto;
+}

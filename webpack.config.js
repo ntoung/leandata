@@ -50,7 +50,6 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        // use: ['style-loader', 'css-loader']
         use: ExtractTextPlugin.extract({
            fallback: 'style-loader',
            use: [
@@ -60,10 +59,6 @@ module.exports = {
               loader: 'postcss-loader',
               options: {
                 plugins: (loader) => [
-                  /* 
-                   * https://github.com/postcss/postcss-loader
-                   * Production configurations
-                   */
                   require('autoprefixer')(),
                   require('cssnano')()
                 ]
