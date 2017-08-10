@@ -30,32 +30,39 @@ class Table extends Component {
   }
 
   displayData() {
-    return this.props.data.map((row, key) => {
-      return (
-        <div className="table-row" key={key}>
-          <div className="wrapper text-4">
-            {
-              row.map((item, key) => {
-                return (
-                  <div className="text" key={key}>{item}</div>
-                );
-              })
-            }
-          </div>
+    return (
+      <div className="data-container">
+        <div className="data">
+        { 
+          this.props.data.map((row, key) => {
+            return (
+              
+                <div className="table-row" key={key}>
+                  <div className="wrapper text-4">
+                    {
+                      row.map((item, key) => {
+                        return (
+                          <div className="text" key={key}>{item}</div>
+                        );
+                      })
+                    }
+                  </div>
+                </div>
+              
+            );  
+          })
+        }
         </div>
-      );  
-    });
+      </div>
+
+    );
   }
 
   render() {
     return (
       <div className="table-container">
-          {this.displayHeaders()}
-        <div className="data-container">
-          <div className='data' style={{'overflowY': 'scroll'}}>
-            {this.displayData()}  
-          </div>
-        </div>
+        {this.displayHeaders()}
+        {this.displayData()}  
       </div>
     );
   }
