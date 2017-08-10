@@ -28,7 +28,6 @@
   min-width: 75px;
 }
 
-
 @media (min-width: 375px) {
   .table-container {
     margin: 0 auto;
