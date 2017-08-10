@@ -13,11 +13,7 @@ class Table extends Component {
 
   displayHeaders() {    
     return (
-      <div className="table-row header" style={{
-        'position': 'absolute',
-        'backgroundColor': 'white',
-        'zIndex': 4
-      }}>
+      <div className="table-row header">
         <div className="wrapper text-4">
           {
             this.props.headers.map((header, key) => {
@@ -53,21 +49,9 @@ class Table extends Component {
 
   render() {
     return (
-      <div className="table-container" style={
-          {
-            'marginTop': '30px',
-            'position': 'relative',
-            'overflowX': 'scroll'
-          }}>
+      <div className="table-container">
           {this.displayHeaders()}
-        <div  style={
-          {
-            'marginTop': '30px',
-            'overflowX': 'scroll',
-            'height': '250px',
-            'position': 'relative'
-          }}>
-          
+        <div className="data-container">
           <div className='data' style={{'overflowY': 'scroll'}}>
             {this.displayData()}  
           </div>

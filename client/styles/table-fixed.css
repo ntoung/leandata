@@ -32,6 +32,7 @@
   .table-container {
     margin: 0 auto;
     width: 90%;
+    position: relative;
   }
 }
 
@@ -39,6 +40,7 @@
   .table-container {
     margin: 0 auto;
     width: 75%;
+    position: relative;
   }
 }
 
@@ -55,6 +57,18 @@
   padding-bottom: 8px;
 }
 
+.data-container {
+  margin-top: 30px;
+  overflow: scroll;
+  height: 250px;
+}
+
 .data {
-  padding-top: 15px;
+  padding-top: 40px;
+}
+
+.header {
+  position: absolute;
+  background-color: white;
+  z-index: 2;
 }
