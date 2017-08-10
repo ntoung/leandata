@@ -13,7 +13,11 @@ class Table extends Component {
 
   displayHeaders() {    
     return (
-      <div className="table-row header">
+      <div className="table-row header" style={{
+        'position': 'absolute',
+        'backgroundColor': 'white',
+        'zIndex': 4
+      }}>
         <div className="wrapper text-4">
           {
             this.props.headers.map((header, key) => {
@@ -28,16 +32,13 @@ class Table extends Component {
       </div>
       );
   }
-  
 
   displayData() {
     return this.props.data.map((row, key) => {
       return (
         <div className="table-row" key={key}>
           <div className="wrapper text-4">
-            <div className="text">{this.props.labels[key]}</div>
             {
-
               row.map((item, key) => {
                 return (
                   <div className="text" key={key}>{item}</div>
@@ -52,44 +53,29 @@ class Table extends Component {
 
   render() {
     return (
-      <div className="container-fluid" >
-        {this.displayHeaders()}
-            
-        <div style={{overflowY: 'scroll', height: '250px'}}>
-          {this.displayData()}  
+      <div className="table-container" style={
+          {
+            'marginTop': '30px',
+            'position': 'relative',
+            'overflowX': 'scroll'
+          }}>
+          {this.displayHeaders()}
+        <div  style={
+          {
+            'marginTop': '30px',
+            'overflowX': 'scroll',
+            'height': '250px',
+            'position': 'relative'
+          }}>
+          
+          <div className='data' style={{'overflowY': 'scroll'}}>
+            {this.displayData()}  
+          </div>
         </div>
       </div>
     );
   }
 }
-/*
-  <div className="container">
-        <div className="table-responsive">
-          <div className="table table-fixed">
-            <div style={{
-              'display': 'block',
-              'width': '97%'
-            }}>
-              <div style={{
-                'display': 'block',
-                'float': 'left'
-              }}>
-                {this.displayHeaders()}
-              </div>
-            </div>
-            
-            <div style={{
-              'display': 'block',
-              'height': '230px',
-              'overflowY': 'auto',
-              'width': '100%',
-            }}>
-                {this.displayData()}
-            </div>
-          </div>
-        </div>
-      </div>
-*/
 
 const mapStateToProps = state => {
   return {

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ReactSelect from 'react-select';
 import 'react-select/dist/react-select.css';
+import '../styles/select.css';
 import { setDisplayedSeries } from '../actions/GraphActions';
 
 class SeriesSelect extends Component {

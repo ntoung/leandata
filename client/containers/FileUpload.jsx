@@ -30,7 +30,6 @@ class FileUpload extends Component {
   }
   
   processData(csv) {
-    
     let lines = [], 
         headers = [], 
         data = [], 
@@ -50,9 +49,40 @@ class FileUpload extends Component {
     // sort data
     data.sort(customSort);
 
-    // process data before updating store
-    data.forEach((line) => {
-      labels.push(line.shift());
+    // debugger;
+
+    // results is data with gaps filled
+    let results = [];
+    // get first index
+    let startDate = data[0][0]; // "Q1-2010"
+    let startQuarter = +startDate.slice(1,2);
+    let startYear = +startDate.slice(-4);
+
+    // get last index     
+    let endDate = data[data.length-1][0]; // "Q1-2017"
+    let endQuarter = +endDate.slice(1,2);
+    let endYear = +endDate.slice(-4);
+
+
+    for (let d = 0, y = startYear; y < endYear; y++) {
+      for (let q = 1; q <= 4; q++) {
+        let label = `Q${q}-${y}`;
+        let row;
+
+        if (data[d][0] === label) {
+          row = data[d];
+          d++;
+        } else {
+          row = [label,null,null,null];
+        }
+
+        labels.push(label);
+        results.push(row);
+      }
+    }
+
+    // represent the data in series
+    results.forEach((line) => {
       line.forEach((datum, index) => {
         // Skip the first index for Period
         series[headers[index+1]] = series[headers[index+1]] || [];
@@ -64,7 +94,7 @@ class FileUpload extends Component {
     this.props.setHeaders({'headers':headers});
     this.props.setSeries({'series':series});
     this.props.setLabels({'labels': labels});
-    this.props.setData({'data': data});
+    this.props.setData({'data': results});
     this.props.setDateStart({'dateStart': 0});
     this.props.setDateEnd({'dateEnd': labels.length - 1});    
     this.props.setDisplayedSeries({'displayedSeries': displayedSeries});
@@ -73,7 +103,7 @@ class FileUpload extends Component {
   render() {
     return (
       <div className="container">
-        <input type="file" accept=".csv" encType="multipart/form-data" onChange={this.uploadFile} />
+        <input style={{'margin': '0 auto'}} type="file" accept=".csv" encType="multipart/form-data" onChange={this.uploadFile} />
       </div>
     );
   }

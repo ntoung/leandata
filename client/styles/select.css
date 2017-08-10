@@ -1,0 +1,15 @@
+
+
+@media (min-width: 375px) {
+  .container {
+    margin: 15px auto;
+    width: 90%;
+  }
+}
+
+@media (min-width: 600px) {
+  .container {
+    margin: 15px auto;
+    width: 75%;
+  }
+}

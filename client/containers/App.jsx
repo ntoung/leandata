@@ -12,11 +12,11 @@ class App extends React.Component {
   render() {
     return (
       <div className="">
+        <FileUpload/>
         <Graph/>
         <SeriesSelect/>
         <DateStartSelect/>
         <DateEndSelect/>
-        <FileUpload/>
         <Table/>
       </div>
     );
