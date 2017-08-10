@@ -36,19 +36,17 @@ class Table extends Component {
         { 
           this.props.data.map((row, key) => {
             return (
-              
-                <div className="table-row" key={key}>
-                  <div className="wrapper text-4">
-                    {
-                      row.map((item, key) => {
-                        return (
-                          <div className="text" key={key}>{item}</div>
-                        );
-                      })
-                    }
-                  </div>
+              <div className="table-row" key={key}>
+                <div className="wrapper text-4">
+                  {
+                    row.map((item, key) => {
+                      return (
+                        <div className="text" key={key}>{item}</div>
+                      );
+                    })
+                  }
                 </div>
-              
+              </div>
             );  
           })
         }
